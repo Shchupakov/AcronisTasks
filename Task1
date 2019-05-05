@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+
+void findSubString(char letter, char* subString, int* curLetter, int length){ 
+
+	if (length != 0){
+		if(letter == subString[*curLetter]){
+			(*curLetter)++;
+			putchar(letter);
+		} else {
+			*curLetter = 0;
+			putchar(letter);
+		}
+		if(*curLetter == length){
+			*curLetter = 0;
+			putchar('*');
+		}
+	}
+}
+
+
+
+
+
+int subStringLen(char* argv[], int argc){
+
+	int number = 0;
+	number = number + strlen(argv[1]);
+
+	return number;
+}
+
+
+
+int main(int argc, char* argv[]) {
+
+	int curLetter = 0;
+	int i = 0;
+	int length = subStringLen(argv, argc);
+	char subString[length];
+	
+	strncpy(subString, argv[1], length);
+
+	char symbol = getchar();
+	if (symbol != '\n') {
+		findSubString(symbol, subString, &curLetter, length);
+	}
+	while(symbol != '\n'){
+		symbol = getchar();
+		findSubString(symbol, subString, &curLetter, length);
+	}
+
+
+	return 0;
+}
